@@ -718,7 +718,7 @@ body {
         setTimeout(function(){ card.classList.remove('long-press'); }, 200);
         if (!didLongPress) showPlayer(v);
       });
-      card.addEventListener('touchmove', function(){ clearTimeout(longPressTimer); }, {passive:true});
+      card.addEventListener('touchmove', function(){ clearTimeout(longPressTimer); didLongPress = true; }, {passive:true});
       // Desktop fallback
       card.addEventListener('click', function(){ if (!didLongPress) showPlayer(v); });
 
