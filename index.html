@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="My Videos">
+  <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAARGVYSWZNTQAqAAAACAABh2kABAAAAAEAAAAaAAAAAAADoAEAAwAAAAEAAQAAoAIABAAAAAEAAAC0oAMABAAAAAEAAAC0AAAAAFbVlnkAAAGfaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA2LjAuMCI+CiAgIDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+CiAgICAgIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiCiAgICAgICAgICAgIHhtbG5zOmV4aWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vZXhpZi8xLjAvIj4KICAgICAgICAgPGV4aWY6UGl4ZWxYRGltZW5zaW9uPjEwMjQ8L2V4aWY6UGl4ZWxYRGltZW5zaW9uPgogICAgICAgICA8ZXhpZjpQaXhlbFlEaW1lbnNpb24+MTAyNDwvZXhpZjpQaXhlbFlEaW1lbnNpb24+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgpVgmNYAAAYQUlEQVR4Ae1dCZRUxdX+ZoEZ9h1kk1U2WUREURRG0agkBo3+xBy3AIoY4h9MUE9+YnLQeMyiSVQUjIhgOHENiCseUEQiIhhAwIV9gAmyDTvMwMx0//eboqFnpnumZ6ZfVb03dc/p6TevX7+q+urrerdu3bo3JSwCJw6BgCCQGpB2uGY4BIoRcIR2RAgUAo7QgepO1xhHaMeBQCHgCB2o7nSNcYR2HAgUAo7QgepO1xhHaMeBQCHgCB2o7nSNcYR2HAgUAo7QgepO1xhHaMeBQCHgCB2o7nSNcYR2HAgUAo7QgepO1xhHaMeBQCHgCB2o7nSNcYR2HAgUAo7QgerOJDYmXASETybxhnpu5QitB2f/lXL8a2DfPN/V2xHad12mqcIHFwN735DC/LWH2hFaEz98VUw4BBxaAhxbB5zY4auqO0Jr6K4dx8PgyzeSvwWgyhE6qojtm4oDjtAedtaRwjAmrj6J65bkF794zHPWy/73gSIhc0o6wONQvvVVjlQwxQWaiUCR/Pe/bSjA498Won4tubfw+GghMLFHOiZ04wmbRFSMvM0A9eaDH4mqsVbqWyAVTJGXVDyzM9BoCNBkGFCvjwyDmTZVvkRd5CfoxCsElueGkJl26jEo3OAxz1klR1cCOU8Bhz+VUfmYImtqbakiyUyR97wNQvIvgZ3PCqHPBVrfBTQbIR9JgywTR2gPO6RNnRQUCH9rn1LseMxzVkndXsDZDwqhPzs1OstEsFjdOPUUoT2aqkf9/jJKDwUay0hdp4eVZCauTuXwkF0bjoQw7ouT2HxU6c1d6qdg2gW10a2BxVMXqh45fwMOvCvIyAic2RHo9JiMzH1l9ObIreR4wXEszlmC7MPZaFm3JYa2G4LmdZpFPjb27gjtMfR78sNYtEdGOZHLW6ahZaZlI3Ss9h9ZAXxzi6jPJ4C2E4B295W4an/+ATyy7FGs3bdOFJIU0bLDaFu/LR4a9H/o2rhLiWt1/2MHofOzgSOfAwUHgIw2QMNBQK2WurFw5UUQCOUB664HaL7rJYsr9ftFPil+n/rlc3hj4xzUTa97+nx+0Qlc0PJ8/P7SyUgzqFub1aGpn+18Btg1Ayg8KODw0SwjWG0hdbtfAS1uPA2YO9CIQGodGVQulgJF6a8nOnaUFIYKsWbfWpkXnFE/+HGG/L/p4GZw9G5Rp3nUN/QemiU0Z807HhfdTADkKyIFe4GtMlFJk3NNh0fOunedCDTOEvzry/hS0sSYkpKCdE4SSwnVjtTUVBmdzc4PzJWev01G5hcUaUuDEAGM5iSakpzoR6DBQKDVbWXKpTpxSZtBOFF0slh3jlxAlaN/i35oktEkcsrIe9mfmq5qHFmm1IzokTm6bI4MxUuw64EG50d/UrOOC2SBIzdXPN/2iVlN1LITMlGTURL16slCh5CnmVgWmjZV55KJTJrcn68YckPX65Fz5L9YlLMYBUUFSEtNw4CW/XFnn9FSNbOTXnOELtgvUClzVgzM1Cnq2EXUrS2Xw4dFddoBZGer9z17FPnyZcmYHVyHqpOQ7qyzxOZ7NtCxo1gP2qrzsZq2Xn7EixYBS5YAa9fKPGOn+FQckgFAlhqjJSNDkZr37CcTt8suAy69VMxsnaKvSvpxZnom7h/4KwzvfC12HN6B5nWbo1+LvqiVWlI9SXrBCdzQnJUj9y1g0/+W1J1LVPjUBJGzbK5O2SQcJVevVqT797/FIiCLEd99B5xM0CG+rlgH2rdXJBw6FMjKktW31sB77wEzZwJLl4pz0PGqtbhhQ0XqW28FfvADebo1qNp9fPotc4TmxG+dLJ/yPaIzR4NIhxjqcT1ny+clZ9TRl2k9Jolffx14+23gq6/ECCBWgGQIR3CqDjk5ybjbmXt07w6MHw+MGiWmN5ng1QAxR2iCu28OsOUBBfPp2bSMzCEZAdMbAd2mC6kvMNsN1GHffRf4+9+BDz9MfBQ2W+uSpfftCzz8MDBCBpCAi1lCE9zcd4D/Pi0TwGxRqYU8qaIX1ustj2Qx25kkc5Ho73PkB/fEE8DnnweDBnfdBfzxj0rvDkaLyrTCPKFZpZDoi8e/VVYPrhDWpfOLufkqPv5YjWicmAVNBgwAZs0Czj03aC0rbo8dhNYBbZ4s59LsdfSo6O18EogJnrprI1FtOHFKE0ccWhMmTwZmzChrUdBRR11l0MLyyitq8qirTE3lBJfQJDBVhY8+AlasADZvVvZcWg+oTtCcRrMXydyqFdC5M7BypaxQbtUEveFimjcH3nwTGDzYcEWSW3zwCL17N/Dii8BssY7QEuEkPgJtxGdm4UKxJPWMf43PPgkOoWlCoyXisceA7dt91g0Gq3v++eopRtUrABIMQnNUvuceYO7cAHSJgSaMGQPceCPw6acAVym51E6hbbyHTNC5+njJJUo9U59Y+9f/hKbOy85YtcpakANRsa5dgdtuA8aNA1qKJcpS8Tehudx8zTXAmjWWwhvAanHyTFv2TTdZ2TixXflU6DcxerQjs+7u27IFGDkS+O1vZSEsrLv0CsvzL6GnTAHmz6+wge4CDxAgkR95BLj/fg9uXr1b+lPl2LYN4IpXZPJSPQzct6uDwF//CkyYUJ07JPW7/hyhOTo7MieVCFW+2aRJauGqyjdI7hf9N0KTyH36KP/j5GLh7lZVBIYMUQs0tcw7+PtvhKYLJ60bTuxB4JNPgHfesaI+/iO0mwhaQZwylXjmGSusHv4iNL3kvviiDJbuhAUIcCvat+ICbFj8Rei9e9UmVMOgueJjIMB9lnR0Miz+IvSuXRIl87BhyFzxcRGgL4hh8RehDxxI3sZUw8AHsniqHKVDLWhuqL8IzTgXTuxFgPFIDD9B/UVobptyYi8Cx45JpH95GRR/MaSGxJYwyIfqFc2tbU7lqASGDKdlwWpUJWpcsy7lRuN0g7v1BW1/jdB0LG/cWB9JGDOOexPpWcaQXZmZ+sr2Y0kMccYgkgbF7M+psg3nCM2YcLRH65CsLOCWW1RJv/mN2nT7r38Br74KfP21jhr4qwzuJGdsPYPirxGajzSGtdIl3bqVLInBWejYzrAIDAHAYIgMheBEIcBtWk7lqCQbGDJWl7RrF7skPloZJ45BGz/7DPjZzwCOTjVd6KNuWPw1QhMs7kBmxCMdkshm0P79ATrm/Oc/KnwY99zVVGFQS8axNij+IzQfa4wloUMYIT9R4QTyoYeUOkKC02e7psmyZca3ZfmP0Fxcuf1276lC82BVJjicuFIFYee+9BJw4YXe19WmEqZPB+bNM1YjfxGa1g06+DNivte5PGiiq44Jino241gwrcRrrwUuhlxcxnID7YMSCtmQ6mH3Fiz6BjDHCH1t6cn15ZcAz+mQFi3UDycRPTqR+nAFjbs6uKmUOzyCLozd8cAD+lsZtlEKC8Phhx4Kh1u14u/dzKtdu3D44MHko8O2vflmODxkiJl26cKzfftwODc3+fhVcEdhi2Vy8mQ4PGaM+c7u0iUcPn7cO3BI7DlzwuHBg8231SuST53qHX5x7myfDj1xIvDCC/ofVaVLpA7t5SIBF4luuAHF2QK48jhwYOka+P9/TorpsKRR7CL0zJnAU09pbH45RZHQJJ3Xwh8NQ2tx8sj295b8MkER7v/UHKPbHkIzGpKJSUQ88nBJW6f/Ncu74w618vj0054nz4zX7KSe56bmBQuSesuKbmYPoRmoXJfTUUWo8PPahnIj0uf75z8Hli9X+V6SZWVJpM1eXMMETBrFDkIz/8k//6mx2QkUZdrpiL4hdIRinhgSnHZtPwrNrkzUpEnsIDQzMh05oqnJCRZjaoQuXb2OHQGqILTF/+hHpT+1/39GuWIedE1intCcBRtcKo2Lsy2EjlSQTlD0xaYDkJ+W0xnHW2POG/OEzs7WPhOOcKTcd1u3eg0frkx9tAYx36AfhPkfNYl5QtMvg7kDbRNbCU2c6D57773KIjJ2rLf28mT0y759ybhLQvcwT+gNGxKqqPaLdNigq9sobkd77jnggw/sVkM0hjYwT+icnOp2qzff93KVMNk1vuIKgHnJuZnXxlAPGlcLzRPacKSduNzywwgdXXma9biRl6mgL744+hPzxxrVN/OE1vjrrVTP6lwlrFTFKriYPiFcnbvvvgou1PixxqeGeUKbXsCI169+G6Gj28GNCX/5CzBjhh0LMs1aR9fO02PzhGb6XRvF6x0xOto8ahTALVEmB40u4qPSeh6w8U4gR35kBbmettw8oTlTt1GCQGjievPNKjiPCYxJ5mlnAy2+APaLbp8ju3U2jpP4d4c9q415Qp9zjmeNq/E3ZlR9btilr4wJ+UkTGZ1rCYHllSrkTqsv4XbFN+XAfM9qY57Q3bsDDRp41sAae2MuN9P3Y9o0c8l82tQWMssmumjhk++Ed74d5gnN6EQktZPkIUDfGOYOfO+95N2zKnf6Jk9G5WhC81gIXVdCqnkk5glNa8Lll3vUvGrcNhSqxpcNfXX/frUkzpGZGyZMy8sHRW+Wp2+KqD4hcW8ISQaG5jcCTa7wrGay/8cCue464PHHzT0aY0HArat+kvffV1GLNG95KheiAiFz95kSsOcr8dfJljgnvYXMVwnBvaOdd3cut6WlPqQ7JCN70lHJFrF1wac0PswMNnky8Pzz2jeklq5Kmf8vln7t1EtOy0uTdda8ykEUaCdllCGbxA+E5i6fwYPVxM/G+l5/vfYetYPQbPattwJnnaUdgLgF2kiQSGWpVjAEAoOxb9kSOWvXOzMtfP/72utkD6HbtAF0xn6uCGrDyW9iVo/b1B59VIUUZsB1m+Waa4B48bU9rLcdOjQbSAKZWgCIBTC34Nskb72lNs0yvp/tQlvzmDFGamnPCM3NlJs2GQEhZqG2EJq5XH78Y5UxwA9kJpgXXaSSLMUE1tuT+gj93ScyCouhPZ5s3Wo8C2mJqnHZ2KTQpvy736lJH8Px+kkmTDCWfk8PoQvFqL7kHgkkszx+t9g2uTFFaE5G//EP4JJLVIqLgwfjY2brJwZt+HoInbMA2CWPzvUvxe8CjbEb4lci6hMThGbc6O99T2UoWL8+qjI+OzT4RNFD6G+eVyk+s2Vmnrc7du/sjnM+9tXen82XZVpdQvL+9KfAlVeqLVS6yvWqHAbFMRTWzVtCH9sJrP6TrOcvFJ1K0DsueuGnol/tW1UWStv2FpLQXpvumI2A+wC5B3DWLHF+t8yyUraXEjtDMjMrmAFJvtkuJJ2yS36hG2aLg8w7EtdMOk38j+hkVfy+QcJ+bZ0LtMkCzrkF6CB+HBmNAUbYsUkYK4SE9mL3N7f1v/ii8l+xwYnIC9yZv5G2aM3iAaGFBHtWyKj8oSIzicxXRHhM/XTXUnEjlMWU1pcpQkc+t+U9Tywy/JElM783fyDUL5l/ZM0aW1rqTT1WrvTmvhXcNfmETq8DnPeAOBuNlyB98wHqzzs+UKSmR2YT8X3uORboMlJiSLQ7Uz1dyTTPlFj+EQnNUboqqd1i3ZkJg/4k6hcDm9cE4SIZBwTNMQKTT+hIZ9WqB3QW39eOI4A5F8qoLXpzem2Z+LwsPrH9I1edea9Mkssz3/LuKELo6pbAOBl//jMwX37cNUk4PzhwAGjVSmurvZ0Usimp8pvpMVomPHLcNis2mXkdfTlsEk4Kq2MD5khMb7OrxP+3ppGZ/ciY0NXBr4pc8J7QrFjn/5F9g03E2XtU/Gp26hT/MxOfcMdKbm7lS6YtmZ5w3IXDrVB+3PlS+VaX/QYtNhoDnUcq4J3KESmB73XlsXPhZPG+ujL6bMlj7v6mRcFrU1nJUsv/L9EwsCTtwoUqMDn38dVUEkejSQwMmCH1EJoN7X1vdHPLHnOEZrxjm8xYFS3H0/zGAOTPPgssXly2TTX5DD3uDIRT00foijqXoQwGDLCL0PG2hNGR6vXX1WIIveGclEWAT9vq5Eove8eEzthDaFb36qvFIjInoYpruWjZMoBL8sz7TfWD+caZFoLqBWfwTuIjwGio3LWiWexKXk91o08fuxIIdeumYi5zVHYkTpyeXboAzICleX1Bj5UjURg6dFDeZoler+M6Zhjgqpcjc+XQJqE1k5kVtIvQrNHdd8uqokwonPgbAUO5y+0jNNMrDB3q7850tQeysoygYB+hGRqMGVT9HHDcSFdaVOjZZxtLYmQfodkvXGW7/XaLeshVpVIIjBD/nWQ5dVWqYNFWwyKV/I6ey2ku4766ihY39NTGlZIoAvSuY37y885L9BtJvc7OEZpNpJcW0ykYmCknFeGadrMf/tAYmQm1vYRm7ah6MAWws3oQDfslklrOYE3tJjSBufNOtVXJkdogTRIs+he/APr1S/Biby6zV4cu3V6mACZgJsILlK6L+78sAoyWRJcAjTkJy1bC5klhrNoyp/W4cUB2dqxP3TlTCDBqLHfm9Oxpqgany7Vf5ThdVTmg8xId6BlG1okdCDRqBDBOtQVkJiD+IjRrzLyGs2cD3HRqaHmV1XAiCDRtCrwiYSksypHjHx06FoMOHQKGDweWLo31qTvnJQL0QmRwnEGDvCyl0vf23wgd3UQ+7l5+WVJ49Io+6469RuCmm5TObBmZ2Wx/E5otoN/A3Lmys7wH/3PiJQLc98lRmbt1uF3OQvG3yhENKJfIR440FlMtuiqBPP7lL4FJk5TebHED/T9CR8Dt3Blgrj4uvTpJHgL0evzDH4AnnrCezGx0cAjN1nDv3xtvKPdTzSGoWHzgpHVrZcV48EHfNE27ynFsV55EBduPwvwQmnZviGa9ZGLnhXwowSInTpRwvqu9uLu5ezJ4ZK1a3u+7ZHplBpXs2tVcW6tQslZCZ3+wE6unbUD+AQniJ5JWOxWdrm2L/uO7Fx9Xof7lf4Vp0J58Ur327Sv/Wj98mpWlSNasGcBVU6pYy5dL3MA9yas9U+txIPCp6qaN0PvXH8ai+1agqCCM1LQU1QHiiV2QV4jz7umGnj/plLxOKX0n7tieMkXlLjEUWb50lSr1PzcP//rXwOjRZZPx0G+cpOYKKv2QmQ2gMgSn0xeD/AwbBtx8s9r+5uPdQtoIveqZ9Vj/2jak15FJRpSECsNo2KEerpp6kTejdFRZYB6XV19VeuGqVfaH7KJP+NixwPjxiUfxJJlp8eFudb7n5EjGBHk6MTQwExJxbkH7PZNidu+uvOO4bM1APwEQbYT+7OE12L5oN9IySs5Dw6GwBPCvjaunX4yMhqIb6hDGz2NoggULVAgvphrmSFdeOmQSgcvu9CrjFn0GLvcqsQ/vf8cdwKhRRrKx6ugCr8rQRuh1szZj3YxNMkKnl2hLqEAmhz0a4YonB0rkXXn8mRDmBNy+Xb2YAJRL6pFg3Yz+w0WEjh0lfYY8+iPukdTP335bqTFMklPdSJv0i6D+ysf+tdeqUdQEFj4vUxuhj32Xh48mrMDxPSeUaiHcDRWFEZbXoEm90WGYmIj8Khs3Ah9/rJaDqcrwMc9AjuUJCcwfCeP50bnn0kvVE6C877jPKkRAG6FZk9yvD2HllPU4tOVIMZEzm2XIZLAjuo6QR3lQhIHSGQeP+vquXSriEs9x8sXghc2bqxGfoz51ZB9PwGJ22eHNwFdTZWIqE9XUDBVCudfd2vLoaCU0AaCKcWjrURSdDKFB+3rIaKRJb46JvjuZVARI4vk3SIpr+UFHpkohKaHNQMmINU/ihHv/FNZO6KQC6G5mDwLM4z5P1KZdMtkuOU2S+YhUs+8YMQlO97y+kd+R5wW5AgKOQK6syO6NQWY2mw/hbTKBzs/1HARHaM8hriEF5In9m+pFPCkQq9BJsR55LI7QHgNcY27foJOoGmmxmxuW05ktJWiQOI95LI7QHgNcY27f9FzZbDFcpe8r3WhZxyrOgFbL+9VIR+jS4Lv/q4ZAiozOlz0rZjqZGJLABadeRfLeW1Y9mV1YgzgrhwaQa1QRtHZki4luz+en7NDDhORXaYPAEVob1K4gHQg4lUMHyq4MbQg4QmuD2hWkAwFHaB0ouzK0IeAIrQ1qV5AOBByhdaDsytCGgCO0NqhdQToQcITWgbIrQxsCjtDaoHYF6UDAEVoHyq4MbQg4QmuD2hWkAwFHaB0ouzK0IeAIrQ1qV5AOBByhdaDsytCGgCO0NqhdQToQcITWgbIrQxsCjtDaoHYF6UDAEVoHyq4MbQg4QmuD2hWkAwFHaB0ouzK0IeAIrQ1qV5AOBByhdaDsytCGgCO0NqhdQToQcITWgbIrQxsCjtDaoHYF6UDAEVoHyq4MbQg4QmuD2hWkAwFHaB0ouzK0IfD/pemp8h/RojYAAAAASUVORK5CYII=">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' ry='100' fill='%23FFF'/%3E%3Cpath d='M130,200 C110,150 140,110 190,120 C220,100 250,95 280,105 C310,90 350,100 370,130 C400,120 430,150 420,190 C445,220 440,260 425,290 C440,330 425,365 395,380 C370,405 340,400 310,390 C280,410 250,415 220,400 C190,410 155,395 135,370 C105,355 90,320 100,280 C85,250 90,220 110,205 Z' fill='%23F00'/%3E%3Cpath d='M205,180 C200,175 198,320 205,330 C210,340 340,265 345,255 C350,245 210,175 205,180Z' fill='%23FFF'/%3E%3C/svg%3E">
+  <title>My Videos</title>
+<style>
+/* === Reset & Base === */
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, #e0f0ff 0%, #f0e0ff 50%, #ffe0f0 100%);
+  min-height: 100vh;
+  color: #333;
+  touch-action: manipulation;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
+  -webkit-user-select: none;
+  user-select: none;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+.hidden { display: none !important; }
+
+/* === Child: Header === */
+.child-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 16px; height: 48px;
+  background: linear-gradient(135deg, #ff4081, #ff6d00, #ffab00);
+  color: white; position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+.child-header h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; cursor: default; }
+.refresh-btn {
+  background: rgba(255,255,255,0.25); border: none; color: white;
+  font-size: 24px; width: 40px; height: 40px; border-radius: 50%;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+.refresh-btn:active { background: rgba(255,255,255,0.4); }
+
+/* === Child: Video Grid === */
+#video-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: calc((100vh - 48px) / 3 - 8px);
+  gap: 8px; padding: 6px 8px;
+  overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none;
+}
+#video-grid::-webkit-scrollbar { display: none; }
+.video-card {
+  background: white; border-radius: 16px; overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1); cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.video-card:active { transform: scale(0.94); }
+.video-card img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block; background: #e0e0e0; border-radius: 16px;
+}
+
+/* === Child: Empty & Loading === */
+#empty-state { text-align: center; padding: 80px 20px; }
+#empty-state p:first-child { font-size: 24px; font-weight: 700; color: #ff4081; }
+#empty-state p:last-child { font-size: 18px; color: #888; margin-top: 8px; }
+#loading { text-align: center; padding: 40px; }
+.spinner {
+  width: 48px; height: 48px; border: 5px solid #e0e0e0;
+  border-top-color: #ff4081; border-radius: 50%;
+  animation: spin 0.8s linear infinite; margin: 0 auto;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* === Child: Player === */
+#child-player { background: #000; min-height: 100vh; }
+#child-player .child-header { background: linear-gradient(135deg, #6a1b9a, #4a148c); }
+.back-btn {
+  background: rgba(255,255,255,0.2); border: none; color: white;
+  font-size: 18px; font-weight: 600; padding: 10px 20px;
+  border-radius: 20px; cursor: pointer;
+}
+.back-btn:active { background: rgba(255,255,255,0.35); }
+#player-wrap { position: relative; width: 100%; height: calc(100vh - 48px); background: #000; }
+#player { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+/* === Parent Panel === */
+#parent-panel { background: #f0f0f5; min-height: 100vh; }
+.parent-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 20px; background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white; position: sticky; top: 0; z-index: 100;
+}
+.parent-header h1 { font-size: 20px; font-weight: 700; }
+.lock-btn {
+  background: rgba(255,255,255,0.2); border: none; color: white;
+  font-size: 14px; font-weight: 600; padding: 8px 16px;
+  border-radius: 16px; cursor: pointer;
+}
+#parent-panel main { max-width: 800px; margin: 0 auto; padding: 16px; }
+.card {
+  background: white; border-radius: 16px; padding: 20px;
+  margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.card h2 { font-size: 18px; margin-bottom: 8px; color: #333; }
+.help-text { font-size: 13px; color: #888; margin-bottom: 12px; }
+.input-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.input-row input[type="text"], .input-row input[type="password"], .input-row input[type="number"] {
+  flex: 1; min-width: 120px; padding: 10px 14px; border: 2px solid #e0e0e0;
+  border-radius: 10px; font-size: 14px; outline: none;
+}
+.input-row input:focus { border-color: #667eea; }
+.input-row button, .card button.accent {
+  padding: 10px 20px; border: none; border-radius: 10px;
+  font-size: 14px; font-weight: 600; cursor: pointer; color: white;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+.card button.accent { background: linear-gradient(135deg, #ff4081, #ff6d00); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #e8eaf6; color: #333; padding: 6px 12px;
+  border-radius: 20px; font-size: 13px;
+}
+.chip button {
+  background: none; border: none; color: #999; font-size: 16px;
+  cursor: pointer; padding: 0 2px; line-height: 1;
+}
+.chip button:hover { color: #e53935; }
+.channel-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.channel-row .chip { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chip-remove {
+  background: none; border: none; color: #999; font-size: 20px;
+  cursor: pointer; padding: 4px; flex-shrink: 0;
+}
+.chip-remove:hover { color: #e53935; }
+.status-bar { font-size: 13px; color: #888; margin-top: 8px; padding: 8px 12px; background: #f5f5f5; border-radius: 8px; }
+.preview-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px; margin-top: 12px;
+}
+.preview-card { border-radius: 10px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.08); background: #fafafa; }
+.preview-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+
+/* === Media Queries === */
+@media (max-width: 480px) {
+  #video-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: calc((100vh - 48px - 24px) / 3); gap: 8px; padding: 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== CHILD GRID VIEW ==================== -->
+<div id="child-grid">
+  <header class="child-header">
+    <h1 id="header-title">My Videos</h1>
+    <button class="refresh-btn" id="refresh-btn" aria-label="Refresh">&#x21bb;</button>
+  </header>
+  <div id="video-grid"></div>
+  <div id="empty-state" class="hidden">
+    <p>No videos yet!</p>
+    <p>Tap the title 5 times to open settings.</p>
+  </div>
+  <div id="loading" class="hidden"><div class="spinner"></div></div>
+</div>
+
+<!-- ==================== CHILD PLAYER VIEW ==================== -->
+<div id="child-player" class="hidden">
+  <header class="child-header" style="background:linear-gradient(135deg,#6a1b9a,#4a148c);">
+    <button class="back-btn" id="back-btn" aria-label="Back">&larr; Back</button>
+  </header>
+  <div id="player-wrap">
+    <iframe id="player" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" playsinline referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  </div>
+</div>
+
+<!-- ==================== PARENT PANEL ==================== -->
+<div id="parent-panel" class="hidden">
+  <header class="parent-header">
+    <h1>Parent Settings</h1>
+    <button class="lock-btn" id="lock-btn">Lock</button>
+  </header>
+  <main>
+    <!-- API Key -->
+    <section class="card">
+      <h2>YouTube API Key</h2>
+      <p class="help-text">Get a free key: <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a> &rarr; Create project &rarr; Enable "YouTube Data API v3" &rarr; Credentials &rarr; Create API Key</p>
+      <div class="input-row">
+        <input type="password" id="cfg-api-key" placeholder="Paste your API key here">
+        <button id="cfg-api-toggle">Show</button>
+      </div>
+    </section>
+
+    <!-- Refresh -->
+    <section class="card">
+      <h2>Refresh Settings</h2>
+      <div class="input-row">
+        <label>Results per keyword</label>
+        <input type="number" id="cfg-max-kw" min="5" max="50" value="20" style="width:70px;">
+        <label>per channel</label>
+        <input type="number" id="cfg-max-ch" min="5" max="50" value="30" style="width:70px;">
+      </div>
+      <div class="input-row" style="margin-top:10px;">
+        <button class="accent" id="cfg-refresh-now">Refresh Now</button>
+      </div>
+      <div id="cfg-status" class="status-bar">No videos cached yet.</div>
+    </section>
+
+    <!-- Whitelist -->
+    <section class="card">
+      <h2>Whitelist Keywords</h2>
+      <p class="help-text">Only videos matching at least one keyword will be shown. Leave empty to show all.</p>
+      <div id="wl-chips" class="chips"></div>
+      <div class="input-row">
+        <input type="text" id="wl-input" placeholder="Add keyword (e.g., bebefinn)">
+        <button id="wl-add">Add</button>
+      </div>
+    </section>
+
+    <!-- Blacklist -->
+    <section class="card">
+      <h2>Blacklist Keywords</h2>
+      <p class="help-text">Videos matching any of these keywords will be hidden.</p>
+      <div id="bl-chips" class="chips"></div>
+      <div class="input-row">
+        <input type="text" id="bl-input" placeholder="Add keyword (e.g., scary)">
+        <button id="bl-add">Add</button>
+      </div>
+    </section>
+
+    <!-- Channels -->
+    <section class="card">
+      <h2>YouTube Channels</h2>
+      <p class="help-text">Add channels by URL.</p>
+      <div id="ch-list"></div>
+      <div class="input-row">
+        <input type="text" id="ch-input" placeholder="Channel URL">
+        <button id="ch-add">Add</button>
+      </div>
+    </section>
+
+    <!-- Preview -->
+    <section class="card">
+      <h2>Preview</h2>
+      <div id="preview-grid" class="preview-grid"></div>
+      <p id="preview-empty" class="hidden" style="color:#999;margin-top:8px;">No videos. Add keywords or channels and click Refresh.</p>
+    </section>
+  </main>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ===== CONFIG =====
+  const Config = {
+    KEY: 'ytk_config',
+    VERSION: 4,
+    DEFAULTS: {
+      youtubeApiKey: 'AIzaSyD2d0H635dIHL7xH45vcv9dg5caVCdAmWI',
+      whitelist: ['peppa pig','bebefinn','twinkle little star','blippi','tennie','meekah'],
+      blacklist: ['#shorts','monster','scary','coco','lullaby','unboxing','Satisfying Experience'],
+      channels: [
+        'https://www.youtube.com/channel/UC-cY4X2sLECUhishGNiyofQ',
+        'https://www.youtubekids.com/channel/UCoookXUzPciGrEZEXmh4Jjg',
+        'https://www.youtubekids.com/channel/UC5PYHgAzJ1wLEidB58SK6Xw',
+        'https://www.youtubekids.com/channel/UCd-cquKy-t4q_GMqzr4oudA',
+        'https://www.youtube.com/channel/UCAOtE1V7Ots4DjM8JLlrYgg'
+      ],
+      maxResultsPerKeyword: 20,
+      maxResultsPerChannel: 30
+    },
+    _data: null,
+    load() {
+      try {
+        const raw = localStorage.getItem(this.KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed._version === this.VERSION) {
+            this._data = { ...this.DEFAULTS, ...parsed };
+          } else {
+            // Version changed — reset to new defaults, clear old cache
+            this._data = JSON.parse(JSON.stringify(this.DEFAULTS));
+            this._data._version = this.VERSION;
+            localStorage.removeItem('ytk_video_cache');
+            localStorage.removeItem('ytk_cache_meta');
+            this.save();
+          }
+        } else {
+          this._data = JSON.parse(JSON.stringify(this.DEFAULTS));
+          this._data._version = this.VERSION;
+          this.save();
+        }
+      } catch(e) { this._data = JSON.parse(JSON.stringify(this.DEFAULTS)); this._data._version = this.VERSION; this.save(); }
+    },
+    save() { localStorage.setItem(this.KEY, JSON.stringify(this._data)); },
+    get(k) { return this._data[k]; },
+    set(k, v) { this._data[k] = v; this.save(); },
+    all() { return this._data; }
+  };
+
+  // ===== VIDEO CACHE =====
+  const Cache = {
+    VID_KEY: 'ytk_video_cache',
+    META_KEY: 'ytk_cache_meta',
+    CH_KEY: 'ytk_channel_id_cache',
+    saveVideos(vids) { try { localStorage.setItem(this.VID_KEY, JSON.stringify(vids)); } catch(e){} },
+    loadVideos() { try { return JSON.parse(localStorage.getItem(this.VID_KEY) || '[]'); } catch(e) { return []; } },
+    saveMeta(source) { localStorage.setItem(this.META_KEY, JSON.stringify({ lastRefresh: Date.now(), lastSource: source })); },
+    loadMeta() { try { return JSON.parse(localStorage.getItem(this.META_KEY) || '{}'); } catch(e) { return {}; } },
+    saveChannelId(handle, id) {
+      const map = this.loadChannelIds();
+      map[handle] = id;
+      localStorage.setItem(this.CH_KEY, JSON.stringify(map));
+    },
+    loadChannelIds() { try { return JSON.parse(localStorage.getItem(this.CH_KEY) || '{}'); } catch(e) { return {}; } }
+  };
+
+  // ===== WATCH HISTORY =====
+  const WatchHistory = {
+    KEY: 'watchedVideos', MAX: 50, EXPIRY: 24*60*60*1000,
+    _get() {
+      try {
+        const d = JSON.parse(localStorage.getItem(this.KEY) || '[]');
+        const now = Date.now();
+        return d.filter(e => (now - e.timestamp) < this.EXPIRY);
+      } catch(e) { return []; }
+    },
+    add(videoId) {
+      const w = this._get().filter(e => e.videoId !== videoId);
+      w.push({ videoId, timestamp: Date.now() });
+      localStorage.setItem(this.KEY, JSON.stringify(w.slice(-this.MAX)));
+    },
+    isWatched(videoId) { return this._get().some(e => e.videoId === videoId); }
+  };
+
+  // ===== YOUTUBE API =====
+  const YT_BASE = 'https://www.googleapis.com/youtube/v3';
+  const YouTubeAPI = {
+    _mapItem(item) {
+      const s = item.snippet || {};
+      const videoId = typeof item.id === 'string' ? item.id : item.id?.videoId;
+      if (!videoId) return null;
+      return { videoId, title: s.title||'', channelTitle: s.channelTitle||'',
+        thumbnail: s.thumbnails?.medium?.url || `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`,
+        publishedAt: s.publishedAt||'', source: 'youtube-api' };
+    },
+    _mapPlaylistItem(item) {
+      const s = item.snippet || {};
+      const videoId = s.resourceId?.videoId;
+      if (!videoId) return null;
+      const title = s.title || '';
+      // Skip live streams and shorts
+      const tl = title.toLowerCase();
+      if (tl.includes('#shorts')) return null;
+      if (tl.includes('live') && (tl.includes('🔴') || tl.includes('#live'))) return null;
+      return { videoId, title, channelTitle: s.channelTitle||'',
+        thumbnail: s.thumbnails?.medium?.url || `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`,
+        publishedAt: s.publishedAt||'', source: 'youtube-api' };
+    },
+    async search(keyword, apiKey, max) {
+      const p = new URLSearchParams({ part:'snippet', type:'video', safeSearch:'strict', maxResults:String(max), q:keyword, key:apiKey });
+      const r = await fetch(`${YT_BASE}/search?${p}`);
+      if (!r.ok) throw new Error(`YT search fail ${r.status}`);
+      const d = await r.json();
+      return (d.items||[]).map(i => this._mapItem(i)).filter(Boolean);
+    },
+    resolveChannelId(url) {
+      // Extract UCxxxx from URL without API call
+      const m = url.match(/channel\/(UC[\w-]+)/);
+      if (m) return m[1];
+      // Check cache
+      const cached = Cache.loadChannelIds();
+      if (cached[url]) return cached[url];
+      return null;
+    },
+    async resolveChannel(handle, apiKey) {
+      // First try without API
+      const direct = this.resolveChannelId(handle);
+      if (direct) return direct;
+
+      let clean = handle;
+      if (handle.includes('youtube.com') || handle.includes('youtubekids.com')) {
+        const m = handle.match(/youtube(?:kids)?\.com\/(@[\w-]+|channel\/(UC[\w-]+))/);
+        if (m) { if (m[2]) { Cache.saveChannelId(handle, m[2]); return m[2]; } clean = m[1]; }
+      }
+      if (clean.startsWith('@')) clean = clean.slice(1);
+
+      // Resolve @handle via API (~1-3 units)
+      const p = new URLSearchParams({ part:'snippet', forHandle:clean, key:apiKey });
+      const r = await fetch(`${YT_BASE}/channels?${p}`);
+      if (r.ok) { const d = await r.json(); if (d.items?.[0]?.id) { Cache.saveChannelId(handle, d.items[0].id); return d.items[0].id; } }
+
+      const p2 = new URLSearchParams({ part:'snippet', forUsername:clean, key:apiKey });
+      const r2 = await fetch(`${YT_BASE}/channels?${p2}`);
+      if (r2.ok) { const d2 = await r2.json(); if (d2.items?.[0]?.id) { Cache.saveChannelId(handle, d2.items[0].id); return d2.items[0].id; } }
+
+      throw new Error(`Cannot resolve channel: ${handle}`);
+    },
+    async channelVideos(url, apiKey, max) {
+      // Use playlistItems (1 unit) instead of search (100 units)
+      // Every channel's uploads playlist ID = "UU" + channel_id_without_UC
+      const chId = await this.resolveChannel(url, apiKey);
+      const uploadsId = 'UU' + chId.slice(2);
+      const p = new URLSearchParams({ part:'snippet', playlistId:uploadsId, maxResults:String(max), key:apiKey });
+      const r = await fetch(`${YT_BASE}/playlistItems?${p}`);
+      if (!r.ok) throw new Error(`YT playlist fail ${r.status}`);
+      const d = await r.json();
+      return (d.items||[]).map(i => this._mapPlaylistItem(i)).filter(Boolean);
+    }
+  };
+
+  // ===== RSS FALLBACK (works when served from MacBook, free, no quota) =====
+  const RSSFallback = {
+    async fetchChannel(url, max) {
+      const m = url.match(/channel\/(UC[\w-]+)/);
+      if (!m) throw new Error('No channel ID in URL');
+      const chId = m[1];
+      const r = await fetch(`/rss?channel_id=${encodeURIComponent(chId)}`);
+      if (!r.ok) throw new Error(`RSS ${r.status}`);
+      const xml = await r.text();
+      const doc = new DOMParser().parseFromString(xml, 'text/xml');
+      const entries = doc.querySelectorAll('entry');
+      const vids = [];
+      for (const entry of entries) {
+        if (vids.length >= max) break;
+        const videoId = entry.querySelector('videoId')?.textContent;
+        if (!videoId) continue;
+        const title = entry.querySelector('title')?.textContent || '';
+        // Skip live streams and shorts — they don't embed properly
+        const titleLower = title.toLowerCase();
+        if (titleLower.includes('live') && (titleLower.includes('🔴') || titleLower.includes('#live'))) continue;
+        if (titleLower.includes('#shorts')) continue;
+        // Check if link points to a Short
+        const link = entry.querySelector('link[rel="alternate"]')?.getAttribute('href') || '';
+        if (link.includes('/shorts/')) continue;
+        vids.push({
+          videoId, title, channelTitle: entry.querySelector('author name')?.textContent || '',
+          thumbnail: `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`,
+          publishedAt: entry.querySelector('published')?.textContent || '', source: 'rss'
+        });
+      }
+      return vids;
+    }
+  };
+
+  // ===== VIDEO FETCHER =====
+  const Fetcher = {
+    async _searchKW(kw, cfg) {
+      if (!cfg.youtubeApiKey) return { vids: [], src: 'none' };
+      try { return { vids: await YouTubeAPI.search(kw, cfg.youtubeApiKey, cfg.maxResultsPerKeyword), src:'youtube-api' }; }
+      catch(e) { console.warn('YT search fail:', e.message); return { vids: [], src: 'none' }; }
+    },
+    async _fetchCh(url, cfg) {
+      // Try YouTube API first (1 unit per channel via playlistItems)
+      if (cfg.youtubeApiKey) {
+        try { return { vids: await YouTubeAPI.channelVideos(url, cfg.youtubeApiKey, cfg.maxResultsPerChannel), src:'youtube-api' }; }
+        catch(e) { console.warn('YT ch fail:', e.message); }
+      }
+      // Fallback: RSS proxy (only when served from a local server, not standalone file)
+      if (location.protocol !== 'file:' && location.hostname !== '') {
+        try { const vids = await RSSFallback.fetchChannel(url, cfg.maxResultsPerChannel); if (vids.length > 0) return { vids, src:'rss' }; }
+        catch(e) { console.warn('RSS fallback fail:', e.message); }
+      }
+      return { vids: [], src: 'none' };
+    },
+    async fetchAll(cfg) {
+      const all = []; let src = 'none';
+      // Tag each video with sourceKey = the channel URL or keyword it came from
+      // This ensures fair shuffle: each source gets equal slots regardless of channelTitle
+      const kwPromises = (cfg.whitelist||[]).map(kw => this._searchKW(kw, cfg).then(r => {
+        for (const v of r.vids) v.sourceKey = 'kw:' + kw;
+        all.push(...r.vids);
+        if (r.src !== 'none') src = r.src;
+      }));
+      const chPromises = (cfg.channels||[]).map(url => this._fetchCh(url, cfg).then(r => {
+        for (const v of r.vids) v.sourceKey = 'ch:' + url;
+        all.push(...r.vids);
+        if (r.src !== 'none') src = r.src;
+      }));
+      await Promise.allSettled([...kwPromises, ...chPromises]);
+      return { videos: all, source: src };
+    }
+  };
+
+  // ===== FILTER =====
+  const Filter = {
+    apply(videos, whitelist, blacklist) {
+      const wl = (whitelist||[]).map(w => w.toLowerCase().trim()).filter(Boolean);
+      const bl = (blacklist||[]).map(b => b.toLowerCase().trim()).filter(Boolean);
+      const seen = new Map();
+      for (const v of videos) { if (!seen.has(v.videoId)) seen.set(v.videoId, v); }
+      return Array.from(seen.values()).filter(v => {
+        const txt = `${v.title} ${v.channelTitle}`.toLowerCase();
+        if (wl.length > 0 && !wl.some(k => txt.includes(k))) return false;
+        if (bl.length > 0 && bl.some(k => txt.includes(k))) return false;
+        return true;
+      });
+    }
+  };
+
+  // ===== SHUFFLE =====
+  const Shuffle = {
+    _useRandom: false,
+    mulberry32(seed) {
+      return function() {
+        seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+        let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+        t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+      };
+    },
+    getHourSeed() {
+      const n = new Date();
+      return n.getFullYear()*1000000 + (n.getMonth()+1)*10000 + n.getDate()*100 + n.getHours();
+    },
+    _shuffle(arr, rng) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rng()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; }
+      return a;
+    },
+    smart(videos) {
+      const rng = this._useRandom ? Math.random : this.mulberry32(this.getHourSeed());
+
+      // Group by sourceKey (channel URL or keyword) — NOT channelTitle.
+      // This gives each fetch source equal representation regardless of how
+      // many videos it returned or which channel the videos belong to.
+      const bySource = {};
+      for (const v of videos) {
+        const k = v.sourceKey || v.channelTitle || 'unknown';
+        if (!bySource[k]) bySource[k] = [];
+        bySource[k].push(v);
+      }
+      const sources = Object.keys(bySource);
+
+      // Shuffle each source's pool internally
+      for (const k of sources) bySource[k] = this._shuffle(bySource[k], rng);
+
+      // Cap each source to a fair share so no single source dominates
+      const target = Math.min(videos.length, 90);
+      const cap = Math.max(Math.ceil(target / sources.length), 9);
+      for (const k of sources) bySource[k] = bySource[k].slice(0, cap);
+
+      // Round-robin across shuffled sources to interleave them evenly
+      const shuffledSources = this._shuffle(sources, rng);
+      const spread = [];
+      let hasMore = true;
+      while (hasMore) {
+        hasMore = false;
+        for (const k of shuffledSources) {
+          if (bySource[k].length > 0) { spread.push(bySource[k].shift()); hasMore = true; }
+        }
+      }
+
+      // Final full shuffle so same-source videos aren't spaced exactly evenly
+      const mixed = this._shuffle(spread, rng);
+
+      // Unwatched first
+      const unwatched = mixed.filter(v => !WatchHistory.isWatched(v.videoId));
+      const watched   = mixed.filter(v =>  WatchHistory.isWatched(v.videoId));
+      this._useRandom = false;
+      return [...unwatched, ...watched];
+    }
+  };
+
+  // ===== AUTH (5-tap, no PIN needed) =====
+  const Auth = {
+    _taps: 0, _timer: null, THRESHOLD: 5, WINDOW: 3000,
+    onTap() {
+      this._taps++;
+      clearTimeout(this._timer);
+      this._timer = setTimeout(() => { this._taps = 0; }, this.WINDOW);
+      if (this._taps >= this.THRESHOLD) { this._taps = 0; showParent(); }
+    }
+  };
+
+  // ===== DOM REFS =====
+  const $ = id => document.getElementById(id);
+  const childGrid = $('child-grid'), childPlayer = $('child-player'), parentPanel = $('parent-panel');
+  const videoGrid = $('video-grid'), emptyState = $('empty-state'), loadingEl = $('loading');
+  const playerEl = $('player');
+  let allVideos = [];
+
+  // ===== HELPERS =====
+  function escapeHtml(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+
+  // ===== VIEW SWITCHING =====
+  function showChild() { childGrid.classList.remove('hidden'); childPlayer.classList.add('hidden'); parentPanel.classList.add('hidden'); }
+  function showPlayer(video) {
+    childGrid.classList.add('hidden'); childPlayer.classList.remove('hidden');
+    playerEl.src = `https://www.youtube.com/embed/${video.videoId}?autoplay=1&rel=0&playsinline=1&iv_load_policy=3`;
+    WatchHistory.add(video.videoId); window.scrollTo(0,0);
+  }
+  function closePlayer() { playerEl.src = ''; childPlayer.classList.add('hidden'); childGrid.classList.remove('hidden'); }
+  function showParent() { childGrid.classList.add('hidden'); childPlayer.classList.add('hidden'); parentPanel.classList.remove('hidden'); ParentUI.load(); }
+  function lockToChild() { parentPanel.classList.add('hidden'); showChild(); renderGrid(); }
+
+  // ===== CHILD GRID =====
+  function renderGrid() {
+    videoGrid.innerHTML = '';
+    const shuffled = Shuffle.smart(allVideos);
+    if (shuffled.length === 0) { emptyState.classList.remove('hidden'); return; }
+    emptyState.classList.add('hidden');
+    for (const v of shuffled) {
+      const card = document.createElement('div');
+      card.className = 'video-card';
+      card.innerHTML = `<img src="${escapeHtml(v.thumbnail)}" alt="${escapeHtml(v.title)}" loading="lazy">`;
+      card.addEventListener('click', () => showPlayer(v));
+      videoGrid.appendChild(card);
+    }
+  }
+
+  async function refreshVideos(showLoading) {
+    if (showLoading) loadingEl.classList.remove('hidden');
+    try {
+      const cfg = Config.all();
+      const { videos, source } = await Fetcher.fetchAll(cfg);
+      const filtered = Filter.apply(videos, cfg.whitelist, cfg.blacklist);
+      if (filtered.length > 0) {
+        allVideos = filtered;
+        Cache.saveVideos(allVideos);
+        Cache.saveMeta(source);
+      }
+    } catch(e) { console.error('Refresh error:', e); }
+    if (showLoading) loadingEl.classList.add('hidden');
+    renderGrid();
+  }
+
+  // ===== PARENT UI =====
+  const ParentUI = {
+    load() {
+      $('cfg-api-key').value = Config.get('youtubeApiKey') || '';
+      $('cfg-max-kw').value = Config.get('maxResultsPerKeyword') || 20;
+      $('cfg-max-ch').value = Config.get('maxResultsPerChannel') || 30;
+      this.renderChips('wl-chips', Config.get('whitelist')||[], 'whitelist');
+      this.renderChips('bl-chips', Config.get('blacklist')||[], 'blacklist');
+      this.renderChannels();
+      this.updateStatus();
+      this.renderPreview();
+    },
+    renderChips(containerId, items, type) {
+      const c = $(containerId); c.innerHTML = '';
+      items.forEach((item, i) => {
+        const chip = document.createElement('span'); chip.className = 'chip';
+        chip.innerHTML = `${escapeHtml(item)} <button data-i="${i}">&times;</button>`;
+        chip.querySelector('button').addEventListener('click', () => { this.removeItem(type, i); });
+        c.appendChild(chip);
+      });
+    },
+    renderChannels() {
+      const c = $('ch-list'); c.innerHTML = '';
+      (Config.get('channels')||[]).forEach((url, i) => {
+        const row = document.createElement('div'); row.className = 'channel-row';
+        row.innerHTML = `<span class="chip channel">${escapeHtml(url)}</span><button class="chip-remove" data-i="${i}">&times;</button>`;
+        row.querySelector('.chip-remove').addEventListener('click', () => { this.removeChannel(i); });
+        c.appendChild(row);
+      });
+    },
+    addItem(type, value) {
+      const list = [...(Config.get(type)||[])]; if (!value || list.includes(value)) return;
+      list.push(value); Config.set(type, list);
+      this.renderChips(type === 'whitelist' ? 'wl-chips' : 'bl-chips', list, type);
+      $(type === 'whitelist' ? 'wl-input' : 'bl-input').value = '';
+    },
+    addChannel(value) {
+      const ch = [...(Config.get('channels')||[])]; if (!value || ch.includes(value)) return;
+      ch.push(value); Config.set('channels', ch);
+      this.renderChannels(); $('ch-input').value = '';
+    },
+    removeItem(type, idx) {
+      const list = [...(Config.get(type)||[])]; list.splice(idx, 1);
+      Config.set(type, list);
+      this.renderChips(type === 'whitelist' ? 'wl-chips' : 'bl-chips', list, type);
+    },
+    removeChannel(idx) {
+      const ch = [...(Config.get('channels')||[])]; ch.splice(idx, 1);
+      Config.set('channels', ch); this.renderChannels();
+    },
+    updateStatus() {
+      const meta = Cache.loadMeta();
+      const vids = Cache.loadVideos();
+      let txt = `${vids.length} videos cached`;
+      if (meta.lastRefresh) {
+        const ago = Math.floor((Date.now() - meta.lastRefresh) / 60000);
+        txt += ` | Last: ${ago < 1 ? 'just now' : ago+'m ago'}`;
+      }
+      if (meta.lastSource) txt += ` | Source: ${meta.lastSource}`;
+      $('cfg-status').textContent = txt;
+    },
+    renderPreview() {
+      const grid = $('preview-grid'); grid.innerHTML = '';
+      const vids = Cache.loadVideos().slice(0, 9);
+      if (vids.length === 0) { $('preview-empty').classList.remove('hidden'); return; }
+      $('preview-empty').classList.add('hidden');
+      for (const v of vids) {
+        const card = document.createElement('div'); card.className = 'preview-card';
+        card.innerHTML = `<img src="${escapeHtml(v.thumbnail)}" loading="lazy">`;
+        grid.appendChild(card);
+      }
+    }
+  };
+
+  // ===== EVENT LISTENERS =====
+  // Tap anywhere on the child header (except refresh button) — 5 taps opens parent
+  document.querySelector('#child-grid .child-header').addEventListener('click', (e) => {
+    if (e.target.closest('#refresh-btn')) return;
+    Auth.onTap();
+  });
+  $('refresh-btn').addEventListener('click', () => { Shuffle._useRandom = true; renderGrid(); });
+  $('back-btn').addEventListener('click', closePlayer);
+  $('lock-btn').addEventListener('click', lockToChild);
+
+  // API key
+  let apiTimer;
+  $('cfg-api-key').addEventListener('input', () => { clearTimeout(apiTimer); apiTimer = setTimeout(() => Config.set('youtubeApiKey', $('cfg-api-key').value.trim()), 1000); });
+  $('cfg-api-toggle').addEventListener('click', () => {
+    const inp = $('cfg-api-key');
+    if (inp.type === 'password') { inp.type = 'text'; $('cfg-api-toggle').textContent = 'Hide'; }
+    else { inp.type = 'password'; $('cfg-api-toggle').textContent = 'Show'; }
+  });
+
+  // Max results
+  $('cfg-max-kw').addEventListener('change', () => Config.set('maxResultsPerKeyword', parseInt($('cfg-max-kw').value)||20));
+  $('cfg-max-ch').addEventListener('change', () => Config.set('maxResultsPerChannel', parseInt($('cfg-max-ch').value)||30));
+
+  // Refresh now
+  $('cfg-refresh-now').addEventListener('click', async () => {
+    $('cfg-refresh-now').textContent = 'Refreshing...'; $('cfg-refresh-now').disabled = true;
+    await refreshVideos(false);
+    $('cfg-refresh-now').textContent = 'Refresh Now'; $('cfg-refresh-now').disabled = false;
+    ParentUI.updateStatus(); ParentUI.renderPreview();
+  });
+
+  // Whitelist
+  $('wl-add').addEventListener('click', () => ParentUI.addItem('whitelist', $('wl-input').value.trim()));
+  $('wl-input').addEventListener('keydown', e => { if (e.key === 'Enter') $('wl-add').click(); });
+
+  // Blacklist
+  $('bl-add').addEventListener('click', () => ParentUI.addItem('blacklist', $('bl-input').value.trim()));
+  $('bl-input').addEventListener('keydown', e => { if (e.key === 'Enter') $('bl-add').click(); });
+
+  // Channels
+  $('ch-add').addEventListener('click', () => ParentUI.addChannel($('ch-input').value.trim()));
+  $('ch-input').addEventListener('keydown', e => { if (e.key === 'Enter') $('ch-add').click(); });
+
+  // ===== LOCKDOWN (child mode) =====
+  document.addEventListener('click', e => { const a = e.target.closest('a'); if (a && !parentPanel.contains(a)) { e.preventDefault(); e.stopPropagation(); } }, true);
+  document.addEventListener('contextmenu', e => { if (!parentPanel.contains(e.target)) e.preventDefault(); });
+  window.addEventListener('popstate', () => { history.pushState(null, '', window.location.href); });
+  history.pushState(null, '', window.location.href);
+
+  // ===== INIT =====
+  Config.load();
+  allVideos = Cache.loadVideos();
+
+  if (allVideos.length > 0) {
+    renderGrid();
+  } else if (Config.get('youtubeApiKey')) {
+    // First run with baked-in config — auto-fetch videos
+    refreshVideos(true);
+  } else {
+    emptyState.classList.remove('hidden');
+  }
+
+  // Check if cache is stale (> 30 min) and auto-refresh
+  const meta = Cache.loadMeta();
+  // Auto-refresh only if cache is older than 24 hours (saves API quota)
+  if (allVideos.length > 0 && meta.lastRefresh && (Date.now() - meta.lastRefresh > 24*60*60*1000) && Config.get('youtubeApiKey')) {
+    refreshVideos(true);
+  }
+
+})();
+</script>
+</body>
+</html>
