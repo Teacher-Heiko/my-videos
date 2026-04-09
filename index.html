@@ -90,10 +90,10 @@ body {
 #player-wrap { position: relative; width: 100%; height: calc(100vh - 48px); background: #000; }
 #player { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 #block-player-btn {
-  position: absolute; top: 12px; right: 12px; z-index: 10;
-  background: rgba(0,0,0,0.18); color: rgba(255,255,255,0.5); border: none;
-  border-radius: 12px; padding: 8px 14px; font-size: 12px; font-weight: 400;
+  background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.45); border: none;
+  border-radius: 16px; padding: 8px 16px; font-size: 13px; font-weight: 400;
   cursor: pointer; opacity: 0; transition: opacity 0.4s ease; pointer-events: none;
+  white-space: nowrap;
 }
 #block-player-btn.visible { opacity: 1; pointer-events: auto; }
 
@@ -177,10 +177,10 @@ body {
 <div id="child-player" class="hidden">
   <header class="child-header" style="background:linear-gradient(135deg,#6a1b9a,#4a148c);">
     <button class="back-btn" id="back-btn">&larr; Back</button>
+    <button id="block-player-btn">&#x1F6AB; Block this video</button>
   </header>
   <div id="player-wrap">
     <iframe id="player" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" playsinline referrerpolicy="strict-origin-when-cross-origin"></iframe>
-    <button id="block-player-btn">&#x1F6AB; Block this video</button>
   </div>
 </div>
 
@@ -421,43 +421,62 @@ body {
     }
   };
 
-  // ===== RSS FALLBACK (MacBook proxy only) =====
-  var RSSFallback = {
+  // ===== RSS (via corsproxy.io — free, no quota) =====
+  var RSS = {
+    _parse: function(text, max) {
+      var doc = new DOMParser().parseFromString(text, 'text/xml');
+      var vids = [];
+      var entries = doc.querySelectorAll('entry');
+      for (var i = 0; i < entries.length; i++) {
+        if (vids.length >= max) break;
+        var entry = entries[i];
+        var videoIdEl = entry.querySelector('videoId');
+        var videoId = videoIdEl ? videoIdEl.textContent : null;
+        if (!videoId) continue;
+        var titleEl = entry.querySelector('title');
+        var title = titleEl ? titleEl.textContent : '';
+        var tl = title.toLowerCase();
+        if (tl.indexOf('#shorts') !== -1) continue;
+        if (tl.indexOf('live') !== -1 && (title.indexOf('\uD83D\uDD34') !== -1 || tl.indexOf('#live') !== -1)) continue;
+        var linkEl = entry.querySelector('link[rel="alternate"]');
+        var link = linkEl ? linkEl.getAttribute('href') : '';
+        if (link && link.indexOf('/shorts/') !== -1) continue;
+        var authorEl = entry.querySelector('author name');
+        vids.push({
+          videoId: videoId, title: title,
+          channelTitle: authorEl ? authorEl.textContent : '',
+          thumbnail: 'https://i.ytimg.com/vi/'+videoId+'/mqdefault.jpg',
+          publishedAt: (entry.querySelector('published') || {textContent:''}).textContent
+        });
+      }
+      return vids;
+    },
     fetchChannel: function(url, max) {
       var m = url.match(/channel\/(UC[\w-]+)/);
-      if (!m) return Promise.reject(new Error('No channel ID'));
-      return fetch('/rss?channel_id='+encodeURIComponent(m[1])).then(function(r) {
-        if (!r.ok) throw new Error('RSS '+r.status);
-        return r.text();
-      }).then(function(text) {
-        var doc = new DOMParser().parseFromString(text, 'text/xml');
-        var vids = [];
-        var entries = doc.querySelectorAll('entry');
-        for (var i = 0; i < entries.length; i++) {
-          if (vids.length >= max) break;
-          var entry = entries[i];
-          var videoIdEl = entry.querySelector('videoId');
-          var videoId = videoIdEl ? videoIdEl.textContent : null;
-          if (!videoId) continue;
-          var titleEl = entry.querySelector('title');
-          var title = titleEl ? titleEl.textContent : '';
-          var tl = title.toLowerCase();
-          if (tl.indexOf('#shorts') !== -1) continue;
-          if (tl.indexOf('live') !== -1 && (title.indexOf('\uD83D\uDD34') !== -1 || tl.indexOf('#live') !== -1)) continue;
-          var linkEl = entry.querySelector('link[rel="alternate"]');
-          var link = linkEl ? linkEl.getAttribute('href') : '';
-          if (link && link.indexOf('/shorts/') !== -1) continue;
-          var authorEl = entry.querySelector('author name');
-          vids.push({
-            videoId: videoId,
-            title: title,
-            channelTitle: authorEl ? authorEl.textContent : '',
-            thumbnail: 'https://i.ytimg.com/vi/'+videoId+'/mqdefault.jpg',
-            publishedAt: (entry.querySelector('published') || {textContent:''}).textContent
-          });
-        }
-        return vids;
-      });
+      if (!m) return Promise.reject(new Error('No channel ID in URL'));
+      var rssUrl = 'https://www.youtube.com/feeds/videos.xml?channel_id=' + m[1];
+      var self = this;
+      // Try corsproxy.io first
+      return fetch('https://corsproxy.io/?' + encodeURIComponent(rssUrl))
+        .then(function(r) {
+          if (!r.ok) throw new Error('corsproxy ' + r.status);
+          return r.text();
+        })
+        .then(function(text) {
+          var vids = self._parse(text, max);
+          if (vids.length === 0) throw new Error('RSS empty');
+          return vids;
+        })
+        .catch(function(e) {
+          console.warn('corsproxy fail, trying allorigins:', e.message);
+          // Fallback to allorigins.win
+          return fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(rssUrl))
+            .then(function(r) {
+              if (!r.ok) throw new Error('allorigins ' + r.status);
+              return r.text();
+            })
+            .then(function(text) { return self._parse(text, max); });
+        });
     }
   };
 
@@ -470,20 +489,16 @@ body {
         .catch(function(e){ console.warn('YT search fail:', e.message); return {vids:[], src:'none'}; });
     },
     _fetchCh: function(url, cfg) {
-      var tryRSS = function() {
-        if (location.protocol !== 'file:' && location.hostname !== '') {
-          return RSSFallback.fetchChannel(url, cfg.maxResultsPerChannel)
-            .then(function(vids){ return vids.length > 0 ? {vids:vids, src:'rss'} : {vids:[], src:'none'}; })
-            .catch(function(e){ console.warn('RSS fail:', e.message); return {vids:[], src:'none'}; });
-        }
-        return Promise.resolve({vids:[], src:'none'});
-      };
-      if (cfg.youtubeApiKey) {
+      var tryAPI = function() {
+        if (!cfg.youtubeApiKey) return Promise.resolve({vids:[], src:'none'});
         return YouTubeAPI.channelVideos(url, cfg.youtubeApiKey, cfg.maxResultsPerChannel)
           .then(function(vids){ return {vids:vids, src:'youtube-api'}; })
-          .catch(function(e){ console.warn('YT ch fail:', e.message); return tryRSS(); });
-      }
-      return tryRSS();
+          .catch(function(e){ console.warn('YT ch fail:', e.message); return {vids:[], src:'none'}; });
+      };
+      // RSS first (free, no quota) → API fallback
+      return RSS.fetchChannel(url, cfg.maxResultsPerChannel)
+        .then(function(vids){ return {vids:vids, src:'rss'}; })
+        .catch(function(e){ console.warn('RSS fail, trying API:', e.message); return tryAPI(); });
     },
     fetchAll: function(cfg) {
       var all = []; var src = 'none';
