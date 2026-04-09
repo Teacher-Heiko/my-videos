@@ -647,8 +647,7 @@ body {
     currentVideo = video;
     childGrid.classList.add('hidden');
     childPlayer.classList.remove('hidden');
-    var embedOrigin = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? 'https://teacher-heiko.github.io' : location.origin;
-    playerEl.src = 'https://www.youtube.com/embed/' + video.videoId + '?autoplay=1&rel=0&playsinline=1&iv_load_policy=3&origin=' + encodeURIComponent(embedOrigin);
+    playerEl.src = 'https://www.youtube.com/embed/' + video.videoId + '?autoplay=1&rel=0&playsinline=1&iv_load_policy=3';
     WatchHistory.add(video.videoId);
     window.scrollTo(0, 0);
     blockPlayerBtn.classList.remove('visible');
