@@ -159,7 +159,7 @@ body {
   <div id="video-grid"></div>
   <div id="empty-state" class="hidden">
     <p>No videos yet!</p>
-    <p>Tap the header 5 times to open settings.</p>
+    <p id="empty-hint">Tap ↻ to load videos, or tap the header 5 times for settings.</p>
   </div>
   <div id="loading" class="hidden"><div class="spinner"></div></div>
 </div>
@@ -841,9 +841,15 @@ body {
 
   // Refresh button → re-shuffle (no API call)
   el('refresh-btn').addEventListener('click', function() {
-    Shuffle._useRandom = true;
-    Shuffle._recentKeys = [];
-    renderGrid();
+    if (allVideos.length === 0) {
+      // No cache at all — do a real API fetch
+      refreshVideos(true);
+    } else {
+      // Re-shuffle existing cache
+      Shuffle._useRandom = true;
+      Shuffle._recentKeys = [];
+      renderGrid();
+    }
   });
 
   // Back button
